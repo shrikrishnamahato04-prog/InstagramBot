@@ -8,19 +8,17 @@ from pyrogram.errors import ApiIdInvalid, ApiIdPublishedFlood, AccessTokenInvali
 
 logging.basicConfig(level=logging.WARNING)
 
-# 1. System clock sync ke liye wait (Isse error fix hoga)
-print("Waiting for clock synchronization...")
+# FIX: Time sync ke liye 15 second ka wait
 time.sleep(15)
 
-# 2. Naya Session Name 'FinalSyncFix' jo error khatam karega
 app = Client(
-    "FinalSyncFix", 
+    "InstaBot_Final_Sync", # FIX: Naya session name
     api_id=Config.API_ID,
     api_hash=Config.API_HASH,
     bot_token=Config.BOT_TOKEN,
     plugins=dict(root="Instaloader"),
     workdir="./",
-    sleep_threshold=120
+    sleep_threshold=120 
 )
 
 if __name__ == "__main__":

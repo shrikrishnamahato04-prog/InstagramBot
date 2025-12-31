@@ -1,6 +1,6 @@
 import os
 import time
-import Config # Check karein agar aapki file ka naam Config.py hai ya config.py
+import Config 
 import logging
 from pyromod import listen
 from pyrogram import Client, idle
@@ -8,22 +8,24 @@ from pyrogram.errors import ApiIdInvalid, ApiIdPublishedFlood, AccessTokenInvali
 
 logging.basicConfig(level=logging.WARNING)
 
-# Time synchronization ke liye wait
-time.sleep(10)
+# 1. System clock sync ke liye wait (Isse error fix hoga)
+print("Waiting for clock synchronization...")
+time.sleep(15)
 
+# 2. Naya Session Name 'FinalSyncFix' jo error khatam karega
 app = Client(
-    "InstagramBotSession", 
+    "FinalSyncFix", 
     api_id=Config.API_ID,
     api_hash=Config.API_HASH,
     bot_token=Config.BOT_TOKEN,
     plugins=dict(root="Instaloader"),
-    workdir="./" 
+    workdir="./",
+    sleep_threshold=120
 )
 
 if __name__ == "__main__":
     try:
         app.start()
-        # Ab bot pehle start hoga, phir username check karega
         me = app.get_me()
         print(f"@{me.username} Started Successfully!")
         idle()
